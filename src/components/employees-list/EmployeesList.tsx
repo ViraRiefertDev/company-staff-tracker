@@ -1,14 +1,19 @@
-import EmployeesListItem from '../employees-list-item/EmployeesListItem';
-import './styles.css';
+import { v4 } from 'uuid';
 
-const EmployeesList = () => {
-  return (
-    <ul className='app-list list-group'>
-      <EmployeesListItem />
-      <EmployeesListItem />
-      <EmployeesListItem />
-    </ul>
-  );
+import EmployeesListItem from '../employees-list-item/EmployeesListItem';
+
+import './styles.css';
+import { EmployeesListProps } from './types';
+
+const EmployeesList = ({ employeesData, onIncrease }: EmployeesListProps) => {
+  const employees = employeesData.map((item) => {
+    const {id, ...itemProps} =item
+    return (
+      <EmployeesListItem key={id} {...itemProps} onIncrease = {()=>{onIncrease(id)}} />
+    );
+  });
+
+  return <ul className='app-list list-group'>{employees}</ul>;
 };
 
 export default EmployeesList;

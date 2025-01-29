@@ -1,13 +1,18 @@
-import './styles.css';
+import cn from 'classnames';
 
-const EmployeesListItem = () => {
+import './styles.css';
+import { EmployeesListItemProps } from './types';
+
+const EmployeesListItem = ({name, salary,increase,onIncrease }: EmployeesListItemProps) => {
+  const classNames = cn('list-group-item d-flex justify-content-between',{increase});
+
   return (
-    <li className='list-group-item d-flex justify-content-between'>
-      <span className='list-group-item-label'>Vasya Pupkin</span>
+    <li className={classNames}>
+      <span className='list-group-item-label ' onClick={onIncrease}>{name}</span>
       <input
         className='list-group-item-input'
         type='text'
-        defaultValue='1000$'
+        defaultValue={salary + '$'}
       />
       <div className='d-flex justify-content-center align-items-center'>
         <button type='button' className='btn-cookie btn-sm'>
