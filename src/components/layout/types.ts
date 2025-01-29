@@ -2,7 +2,7 @@ interface Employee {
   name: string;
   salary: string;
   increase:boolean;
-  like:boolean;
+  rise:boolean;
   id:string;
 }
 

@@ -3,19 +3,19 @@ import cn from 'classnames';
 import './styles.css';
 import { EmployeesListItemProps } from './types';
 
-const EmployeesListItem = ({name, salary,increase,like,onIncrease,onLike }: EmployeesListItemProps) => {
-  const classNames = cn('list-group-item d-flex justify-content-between',{increase}, {like});
+const EmployeesListItem = ({name, salary,increase,rise,onToggleProp }: EmployeesListItemProps) => {
+  const classNames = cn('list-group-item d-flex justify-content-between',{increase}, {like:rise});
 
   return (
     <li className={classNames}>
-      <span className='list-group-item-label ' onClick={onIncrease}>{name}</span>
+      <span className='list-group-item-label ' onClick={onToggleProp} data-toggle = 'increase'>{name}</span>
       <input
         className='list-group-item-input'
         type='text'
         defaultValue={salary + '$'}
       />
       <div className='d-flex justify-content-center align-items-center'>
-        <button type='button' className='btn-cookie btn-sm' onClick={onLike}>
+        <button type='button' className='btn-cookie btn-sm' onClick={onToggleProp} data-toggle = 'rise'>
           <i className='fas fa-cookie'></i>
         </button>
 

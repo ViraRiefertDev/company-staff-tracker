@@ -12,17 +12,17 @@ import { EmployeesData } from './types';
 function Layout() {
   const [data, setData] = useState<EmployeesData>({
     employeesData: [
-      { name: 'John C.', salary: '800', increase: true, like:false, id: '1' },
-      { name: 'Alex M.', salary: '3000', increase: false, like:false, id: '2' },
-      { name: 'Carl W.', salary: '15000', increase: false, like:false, id: '3' },
+      { name: 'John C.', salary: '800', increase: true, rise:true, id: '1' },
+      { name: 'Alex M.', salary: '3000', increase: false, rise:false, id: '2' },
+      { name: 'Carl W.', salary: '15000', increase: false, rise:false, id: '3' },
     ],
   });
 
-  const onIncrease = (id: string) => {
+  const onToggleProp = (id: string, prop:'rise'|'increase') => {
     setData((prevState) => {
       const newArray = prevState.employeesData.map((item) => {
         if (item.id === id) {
-          return { ...item, increase: !item.increase };
+          return { ...item, [prop]: !item[prop] };
         } else {
           return item;
         }
@@ -31,18 +31,7 @@ function Layout() {
     });
   };
 
-  const onLike = (id:string) => {
-    setData((prevState) => {
-      const newArray = prevState.employeesData.map((item) => {
-        if (item.id === id) {
-          return { ...item, like: !item.like };
-        } else {
-          return item;
-        }
-      });
-      return { employeesData: newArray };
-    });
-  };
+  
 
   return (
     <div className='app'>
@@ -51,7 +40,7 @@ function Layout() {
         <SearchPanel />
         <AppFilter />
       </div>
-      <EmployeesList employeesData={data.employeesData} onIncrease = {onIncrease} onLike = {onLike}/>
+      <EmployeesList employeesData={data.employeesData} onToggleProp = {onToggleProp} />
       <EmployeesAddForm />
     </div>
   );

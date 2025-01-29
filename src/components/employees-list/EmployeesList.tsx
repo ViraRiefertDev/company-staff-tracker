@@ -3,11 +3,21 @@ import EmployeesListItem from '../employees-list-item/EmployeesListItem';
 import './styles.css';
 import { EmployeesListProps } from './types';
 
-const EmployeesList = ({ employeesData, onIncrease,onLike }: EmployeesListProps) => {
+const EmployeesList = ({ employeesData, onToggleProp }: EmployeesListProps) => {
   const employees = employeesData.map((item) => {
-    const {id, ...itemProps} =item
+    const { id, ...itemProps } = item;
+
     return (
-      <EmployeesListItem key={id} {...itemProps} onIncrease = {()=>{onIncrease(id)}} onLike = {()=>{onLike(id)}}/>
+      <EmployeesListItem
+        key={id}
+        {...itemProps}
+        onToggleProp={(e) => {
+          onToggleProp(
+            id,
+            e.currentTarget.getAttribute('data-toggle') as 'increase' | 'rise'
+          );
+        }}
+      />
     );
   });
 
