@@ -7,18 +7,27 @@ import EmployeesList from '../employees-list/EmployeesList';
 import EmployeesAddForm from '../employees-add-form/EmployeesAddForm';
 
 import './styles.css';
-import { EmployeesData } from './types';
+import { EmployeesData, InputData } from './types';
+import { v4 } from 'uuid';
+
+const intitDataState = {
+  employeesData: [
+    { name: 'John C.', salary: '800', increase: true, rise: true, id: '1' },
+    { name: 'Alex M.', salary: '3000', increase: false, rise: false, id: '2' },
+    { name: 'Carl W.', salary: '15000', increase: false, rise: false, id: '3' },
+  ],
+};
+
+
 
 function Layout() {
-  const [data, setData] = useState<EmployeesData>({
-    employeesData: [
-      { name: 'John C.', salary: '800', increase: true, rise:true, id: '1' },
-      { name: 'Alex M.', salary: '3000', increase: false, rise:false, id: '2' },
-      { name: 'Carl W.', salary: '15000', increase: false, rise:false, id: '3' },
-    ],
-  });
+  const [data, setData] = useState<EmployeesData>(intitDataState);
 
-  const onToggleProp = (id: string, prop:'rise'|'increase') => {
+  const numberOfEmployees = data.employeesData.length;
+
+  const recieveBonus = data.employeesData.filter((item)=>item.increase).length
+
+  const onToggleProp = (id: string, prop: 'rise' | 'increase') => {
     setData((prevState) => {
       const newArray = prevState.employeesData.map((item) => {
         if (item.id === id) {
@@ -31,17 +40,29 @@ function Layout() {
     });
   };
 
-  
+  const addEmployee = (inputData: InputData) => {
+    setData((prevValue) => {
+      return {
+        employeesData: [
+          ...prevValue.employeesData,
+          { ...inputData, increase: false, rise: false, id: v4() },
+        ],
+      };
+    });
+  };
 
   return (
     <div className='app'>
-      <AppInfo />
+      <AppInfo numberOfEmployees = {numberOfEmployees} recieveBonus = {recieveBonus}/>
       <div className='search-panel'>
         <SearchPanel />
         <AppFilter />
       </div>
-      <EmployeesList employeesData={data.employeesData} onToggleProp = {onToggleProp} />
-      <EmployeesAddForm />
+      <EmployeesList
+        employeesData={data.employeesData}
+        onToggleProp={onToggleProp}
+      />
+      <EmployeesAddForm addEmployee = {addEmployee}/>
     </div>
   );
 }

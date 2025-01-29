@@ -9,3 +9,8 @@ interface Employee {
 export interface EmployeesData {
   employeesData: Employee[];
 }
+
+export interface InputData {
+  name:string,
+  salary:string,
+}
