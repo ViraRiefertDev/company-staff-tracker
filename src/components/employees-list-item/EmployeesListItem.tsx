@@ -3,8 +3,8 @@ import cn from 'classnames';
 import './styles.css';
 import { EmployeesListItemProps } from './types';
 
-const EmployeesListItem = ({name, salary,increase,onIncrease }: EmployeesListItemProps) => {
-  const classNames = cn('list-group-item d-flex justify-content-between',{increase});
+const EmployeesListItem = ({name, salary,increase,like,onIncrease,onLike }: EmployeesListItemProps) => {
+  const classNames = cn('list-group-item d-flex justify-content-between',{increase}, {like});
 
   return (
     <li className={classNames}>
@@ -15,7 +15,7 @@ const EmployeesListItem = ({name, salary,increase,onIncrease }: EmployeesListIte
         defaultValue={salary + '$'}
       />
       <div className='d-flex justify-content-center align-items-center'>
-        <button type='button' className='btn-cookie btn-sm'>
+        <button type='button' className='btn-cookie btn-sm' onClick={onLike}>
           <i className='fas fa-cookie'></i>
         </button>
 

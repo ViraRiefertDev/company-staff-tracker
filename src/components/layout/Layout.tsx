@@ -12,9 +12,9 @@ import { EmployeesData } from './types';
 function Layout() {
   const [data, setData] = useState<EmployeesData>({
     employeesData: [
-      { name: 'John C.', salary: '800', increase: true, id: '1' },
-      { name: 'Alex M.', salary: '3000', increase: false, id: '2' },
-      { name: 'Carl W.', salary: '15000', increase: false, id: '3' },
+      { name: 'John C.', salary: '800', increase: true, like:false, id: '1' },
+      { name: 'Alex M.', salary: '3000', increase: false, like:false, id: '2' },
+      { name: 'Carl W.', salary: '15000', increase: false, like:false, id: '3' },
     ],
   });
 
@@ -31,6 +31,19 @@ function Layout() {
     });
   };
 
+  const onLike = (id:string) => {
+    setData((prevState) => {
+      const newArray = prevState.employeesData.map((item) => {
+        if (item.id === id) {
+          return { ...item, like: !item.like };
+        } else {
+          return item;
+        }
+      });
+      return { employeesData: newArray };
+    });
+  };
+
   return (
     <div className='app'>
       <AppInfo />
@@ -38,7 +51,7 @@ function Layout() {
         <SearchPanel />
         <AppFilter />
       </div>
-      <EmployeesList employeesData={data.employeesData} onIncrease = {onIncrease}/>
+      <EmployeesList employeesData={data.employeesData} onIncrease = {onIncrease} onLike = {onLike}/>
       <EmployeesAddForm />
     </div>
   );
