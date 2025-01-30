@@ -9,5 +9,5 @@ export interface InputData {
 }
 
 export interface EmployeeAddFormProps {
-  addEmployee: (inputData:InputDataState)=> void
+  addEmployee: (inputData:InputData)=> void
 }
