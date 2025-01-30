@@ -1,6 +1,11 @@
 export interface InputDataState {
   name: string;
-  salary: string;
+  salary: number|string;
+}
+
+export interface InputData {
+  name: string;
+  salary: number;
 }
 
 export interface EmployeeAddFormProps {

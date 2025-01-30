@@ -1,6 +1,6 @@
 interface Employee {
   name: string;
-  salary: string;
+  salary: number;
   increase:boolean;
   rise:boolean;
   id:string;
@@ -12,5 +12,5 @@ export interface EmployeesData {
 
 export interface InputData {
   name:string,
-  salary:string,
+  salary:number,
 }

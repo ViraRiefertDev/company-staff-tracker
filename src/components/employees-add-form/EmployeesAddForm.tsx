@@ -1,32 +1,35 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import './styles.css';
-import { EmployeeAddFormProps, InputDataState } from './types';
+import { EmployeeAddFormProps, InputData, InputDataState } from './types';
 
 const initInputState = {
   name: '',
   salary: '',
-}
+};
 
-const EmployeesAddForm = ({addEmployee}:EmployeeAddFormProps) => {
+const EmployeesAddForm = ({ addEmployee }: EmployeeAddFormProps) => {
   const [inputData, setInputData] = useState<InputDataState>(initInputState);
-  const {name, salary} = inputData;
+  const { name, salary } = inputData;
 
-  const onValueChange = (e:ChangeEvent<HTMLInputElement>) =>{
-    const {name, value} = e.target;
-    setInputData((prevState)=>({
+  const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputData((prevState) => ({
       ...prevState,
-      [name]:value,
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
-  const handleSubmit = (e:FormEvent<HTMLFormElement>) =>{
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(inputData.name !== '' && inputData.salary !== ''){
-      addEmployee(inputData)
+    if (inputData.name !== '' && !isNaN(Number(inputData.salary))) {
+      addEmployee({
+        ...inputData,
+        salary: Number(inputData.salary),
+      } as InputData);
     }
     setInputData(initInputState);
-  }
+  };
 
   return (
     <div className='app-add-form'>

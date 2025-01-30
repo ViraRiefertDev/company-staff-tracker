@@ -1,6 +1,6 @@
 interface Employee {
   name: string;
-  salary: string;
+  salary: number;
   increase: boolean;
   rise: boolean;
   id: string;
