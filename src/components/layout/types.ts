@@ -1,4 +1,4 @@
-interface Employee {
+export interface Employee {
   name: string;
   salary: number;
   increase:boolean;

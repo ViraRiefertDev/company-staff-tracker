@@ -7,7 +7,7 @@ import EmployeesList from '../employees-list/EmployeesList';
 import EmployeesAddForm from '../employees-add-form/EmployeesAddForm';
 
 import './styles.css';
-import { EmployeesData, InputData } from './types';
+import { Employee, EmployeesData, InputData } from './types';
 import { v4 } from 'uuid';
 
 const intitDataState = {
@@ -18,10 +18,12 @@ const intitDataState = {
   ],
 };
 
+type FilterStateType = 'all' | 'rise' | 'moreThen1000';
+
 function Layout() {
   const [data, setData] = useState<EmployeesData>(intitDataState);
   const [term, setTerm] = useState<string>('');
-
+  const [filter, setFilter] = useState<FilterStateType>('all');
 
   const numberOfEmployees = data.employeesData.length;
 
@@ -61,27 +63,36 @@ function Layout() {
     });
   };
 
-  const searchEmp = (items: EmployeesData, term: string) => {
+  const searchEmp = (items: Employee[], term: string): Employee[] => {
     if (term.length === 0) {
       return items;
     }
-    return {employeesData: items.employeesData.filter((item) => item.name.indexOf(term) > -1)};
+    return items.filter((item) => item.name.indexOf(term) > -1);
   };
 
   const onUpdateSearch = (term: string) => {
     setTerm(term);
   };
 
-  const filterPost = (items:EmployeesData, filter: string) =>{
-    switch(filter){
+  const filterPost = (
+    items: Employee[],
+    filter: FilterStateType
+  ): Employee[] => {
+    switch (filter) {
       case 'rise':
-        return items.employeesData.filter((item)=> item.rise);
-        case 'moreThen1000':
-          return items.employeesData.filter((item)=> item.salary>1000)
+        return items.filter((item) => item.rise);
+      case 'moreThen1000':
+        return items.filter((item) => item.salary > 1000);
+      case 'all':
+        return items;
     }
-  }
+  };
 
-  const visibleData:EmployeesData = searchEmp(data,term);
+  const onFilterSelect = (filter: FilterStateType) => {
+    setFilter(filter);
+  };
+
+  const visibleData = filterPost(searchEmp(data.employeesData, term), filter);
 
   return (
     <div className='app'>
@@ -91,10 +102,10 @@ function Layout() {
       />
       <div className='search-panel'>
         <SearchPanel onUpdateSearch={onUpdateSearch} />
-        <AppFilter />
+        <AppFilter filter={filter} onFilterSelect={onFilterSelect} />
       </div>
       <EmployeesList
-        employeesData={visibleData.employeesData}
+        employeesData={visibleData}
         onToggleProp={onToggleProp}
         deleteEmployee={deleteEmployee}
       />
