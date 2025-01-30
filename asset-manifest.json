@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/company-staff-tracker/static/css/main.62ab9a58.css",
+    "main.js": "/company-staff-tracker/static/js/main.961710da.js",
+    "index.html": "/company-staff-tracker/index.html",
+    "main.62ab9a58.css.map": "/company-staff-tracker/static/css/main.62ab9a58.css.map",
+    "main.961710da.js.map": "/company-staff-tracker/static/js/main.961710da.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.62ab9a58.css",
+    "static/js/main.961710da.js"
+  ]
+}
