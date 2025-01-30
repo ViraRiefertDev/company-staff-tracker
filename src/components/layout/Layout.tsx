@@ -12,7 +12,7 @@ import { v4 } from 'uuid';
 
 const intitDataState = {
   employeesData: [
-    { name: 'John C.', salary: '800', increase: true, rise: true, id: '1' },
+    { name: 'John C.', salary: '800', increase: false, rise: true, id: '1' },
     { name: 'Alex M.', salary: '3000', increase: false, rise: false, id: '2' },
     { name: 'Carl W.', salary: '15000', increase: false, rise: false, id: '3' },
   ],
@@ -51,6 +51,14 @@ function Layout() {
     });
   };
 
+  const deleteEmployee = (id:string)=>{
+    setData((prevValue)=>{
+      return {
+        employeesData: prevValue.employeesData.filter((item)=> item.id !== id)
+      }
+    })
+  }
+
   return (
     <div className='app'>
       <AppInfo numberOfEmployees = {numberOfEmployees} recieveBonus = {recieveBonus}/>
@@ -61,6 +69,7 @@ function Layout() {
       <EmployeesList
         employeesData={data.employeesData}
         onToggleProp={onToggleProp}
+        deleteEmployee = {deleteEmployee}
       />
       <EmployeesAddForm addEmployee = {addEmployee}/>
     </div>

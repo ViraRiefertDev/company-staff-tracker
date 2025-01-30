@@ -1,12 +1,13 @@
 interface Employee {
   name: string;
   salary: string;
-  increase:boolean;
-  rise:boolean;
-  id:string;
+  increase: boolean;
+  rise: boolean;
+  id: string;
 }
 
 export interface EmployeesListProps {
   employeesData: Employee[];
-  onToggleProp: (id:string, prop:'rise'|'increase')=>void;
+  onToggleProp: (id: string, prop: 'rise' | 'increase') => void;
+  deleteEmployee: (id: string) => void;
 }

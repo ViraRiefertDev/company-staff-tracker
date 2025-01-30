@@ -3,7 +3,7 @@ import cn from 'classnames';
 import './styles.css';
 import { EmployeesListItemProps } from './types';
 
-const EmployeesListItem = ({name, salary,increase,rise,onToggleProp }: EmployeesListItemProps) => {
+const EmployeesListItem = ({name, salary,increase,rise,onToggleProp, deleteEmployee }: EmployeesListItemProps) => {
   const classNames = cn('list-group-item d-flex justify-content-between',{increase}, {like:rise});
 
   return (
@@ -19,7 +19,7 @@ const EmployeesListItem = ({name, salary,increase,rise,onToggleProp }: Employees
           <i className='fas fa-cookie'></i>
         </button>
 
-        <button className='btn-trash btn-sm'>
+        <button className='btn-trash btn-sm' onClick={deleteEmployee}>
           <i className='fas fa-trash'></i>
         </button>
         <i className='fas fa-star'></i>

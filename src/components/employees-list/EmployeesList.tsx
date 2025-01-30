@@ -3,7 +3,7 @@ import EmployeesListItem from '../employees-list-item/EmployeesListItem';
 import './styles.css';
 import { EmployeesListProps } from './types';
 
-const EmployeesList = ({ employeesData, onToggleProp }: EmployeesListProps) => {
+const EmployeesList = ({ employeesData, onToggleProp,deleteEmployee }: EmployeesListProps) => {
   const employees = employeesData.map((item) => {
     const { id, ...itemProps } = item;
 
@@ -17,6 +17,7 @@ const EmployeesList = ({ employeesData, onToggleProp }: EmployeesListProps) => {
             e.currentTarget.getAttribute('data-toggle') as 'increase' | 'rise'
           );
         }}
+        deleteEmployee = {()=>{deleteEmployee(id)}}
       />
     );
   });
